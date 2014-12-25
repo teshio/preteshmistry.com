@@ -1,10 +1,12 @@
 {
-    "name": "Pretesh/pretesh-mistry.com",
+    "name": "pretesh/pretesh-mistry.com",
     "authors": [
         {
             "name": "Pretesh",
             "email": "teshio@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {
+		"components/jquery": "1.9.*"
+	}
 }
