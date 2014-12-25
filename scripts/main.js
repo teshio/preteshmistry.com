@@ -7,15 +7,23 @@ var main = {
             for (var i = 0; i < tweets.length; i++) {
                 var t = tweets[i];
                 var text = t.text;
-                var html = '<div class="tweet" style="display:none;">{0}</div>'.format(text);
+                
+                var r = Math.random();
+                
+                var user = '{0} - {1}'.format(t.user.screen_name, t.created_at);
+                
+                var html = '<div class="tweet" data-depth="{1}" style="display:none;">{0}<div class="user">{2}</div></div>'.format(
+                    text, 
+                    r,
+                    user);
                 
                 $('#tweets').append(html);               
                 
                 //console.log();
             }
                 $('.tweet').slideDown('slow');
-            //console.log(json);
-
+            console.log(json);
+            //var parallax = new Parallax($('#tweets').get(0));
         });
     }
 };

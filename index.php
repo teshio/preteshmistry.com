@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Pretesh Mistry - Home</title>
@@ -7,7 +7,7 @@
         <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
         <script src="components/jquery/jquery.min.js" type="text/javascript"></script>
-        <script src="scripts/parallax.min.js" type="text/javascript"></script>
+        <script src="scripts/parallax.js" type="text/javascript"></script>
         <script src="scripts/main.js" type="text/javascript"></script>
         <style type="text/css">
             .tweet{
@@ -18,6 +18,15 @@
                 margin:20px;
                 border-radius:3px;
                 border: 1px solid #888;
+            }
+            
+            .user{
+                text-align: right;              
+                font-size:10px;
+            }
+            
+            .tweet:hover{
+                background-color:#777;
             }
             
             body{
@@ -37,9 +46,11 @@
 
         <h1>What's happening right now...</h1>
         
-        <div id="tweets">
-            
+        <div id="tweets">            
         </div>
+        
+        
+
         
         <script>
             (function (i, s, o, g, r, a, m) {
