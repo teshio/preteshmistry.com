@@ -6,7 +6,7 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
-        <script src="vendor/components/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="components/jquery/jquery.min.js" type="text/javascript"></script>
         <script src="scripts/parallax.min.js" type="text/javascript"></script>
         <script src="scripts/main.js" type="text/javascript"></script>
         <style type="text/css">
