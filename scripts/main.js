@@ -1,6 +1,6 @@
 var main = {
     loadTweets: function () {
-        $.getJSON('./twitter.php', {q: 'news'}, function (json) {
+        $.getJSON('./twitter.php', {q: 'news', rand: Math.random()}, function (json) {
 
             var tweets = json.statuses;
 
@@ -12,10 +12,11 @@ var main = {
                 
                 var user = '{0} - {1}'.format(t.user.screen_name, t.created_at);
                 
-                var html = '<div class="tweet" data-depth="{1}" style="display:none;">{0}<div class="user">{2}</div></div>'.format(
+                var html = '<div class="tweet" data-depth="{1}" style="display:none;"><div class="profile-img"><img src={3} /></div>{0}<div class="user">{2}<br ><br ></div></div>'.format(
                     text, 
                     r,
-                    user);
+                    user,
+                    t.user.profile_image_url);
                 
                 $('#tweets').append(html);               
                 

@@ -19,7 +19,9 @@
                 border-radius:3px;
                 border: 1px solid #888;
             }
-            
+            .profile-img{
+                float:left;
+            }
             .user{
                 text-align: right;              
                 font-size:10px;

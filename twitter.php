@@ -15,7 +15,7 @@ $settings = array(
 
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
-$getfield = '?q='. $_GET['q'] . '&lang=en-gb&result_type=popular';
+$getfield = '?q='. $_GET['q'] . '&lang=en-gb&result_type=popular&count=50';
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
