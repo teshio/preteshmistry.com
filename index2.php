@@ -1,7 +1,3 @@
-<?php
-header('Location: index2.php');
-?>
-
 <!doctype html>
 <html lang="en">
     <head>
