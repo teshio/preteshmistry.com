@@ -10,34 +10,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">       
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
         <style>
-            
-            .tweets{
-                padding: 10px;
-            }
 
-            .tweet-sizer{
-                width: 30%;
-            }
+
+
+
             .tweet{
-                width: 95%;
+                width: 100%;
                 padding:10px;
                 background-color:#444;
                 border-radius: 3px;
-                margin: 5px;
+                margin-right: 10px;
+                margin-bottom: 10px;
             }
-            
+
             .tweet.ng-leave{
                 animation: fadeOut 2s;
             }
             @media screen and (min-width: 768px  ) {
-                .tweet { width: 30%; }
+                .tweet { width: 31.5%; }
             }
             @media screen and (min-width: 992px ) {
-                .tweet { width: 30%; }
+                .tweet { width: 32.5%; }
             }
-            
-            @media screen and (min-width: 1200px) {
+
+            @media screen and (min-width: 1500px) {
                 .tweet { width: 18%; }
             }
 
@@ -55,12 +53,12 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div>
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                    <!--                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>-->
                     <a class="navbar-brand" href="" ng-click="loadTweets()">What's happening right now!</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
@@ -69,36 +67,42 @@
         </nav>
 
         <div class="container-fluid">
-            <button class="btn btn-primary" ng-click="loadTweets()">Refresh</button>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" ng-model="searchQuery" class="form-control"/>                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" ng-click="loadTweets()" ng-disabled="loading"><i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}</button>
+                </div>
+
+                </div>
+
+            </div>
         </div>
 
-        <div class="tweets">
-            <div class="tweet-sizer"></div>
-            <div class="tweet" ng-repeat="t in tweets.statuses">
+        <div class="container-fluid">
+            <div class="tweets">
+                <div class="tweet" ng-repeat="t in tweets.statuses">
 
-                <div class="container-fluid">
 
                     <div class="row-fluid">
-                        
+
                         <div class="media">
-                            
+
                             <div class="media-left">
                                 <p>
-                                <img class="media-object" ng-src="{{t.user.profile_image_url}}" />                                                                
-                                    
+                                    <img class="media-object" ng-src="{{t.user.profile_image_url}}" />                                                                
+
                                 </p>
                             </div>
-                                                        <div class="media-body">
-                            <p class="" ng-bind-html="twitterLinks(t.text)"></p>
+                            <div class="media-body">
+                                <p class="" ng-bind-html="twitterLinks(t.text)"></p>
                             </div>
 
-                        </div>
-                        
-                        
-                        <div class="col-xs-2">
-                        </div>
-                        <div class="col-xs-10">
-                        </div>
+                        </div>                        
                     </div>
 
                     <div class="row-fluid">
@@ -106,7 +110,7 @@
                             <p class="small">
                                 <span class="text-info">{{t.user.screen_name}}</span>
                                 &nbsp;|&nbsp;
-                                <span class="text-success">{{ tweetDate(t) }}</span>
+                                <span class="text-success">{{ tweetDate(t)}}</span>
 
                             </p>    
                         </div>
@@ -135,9 +139,13 @@
                                         $scope.test = 'sdf';
                                         $scope.tweets = [];
 
+                                        $scope.loading = false;
+
+                                        $scope.searchQuery = 'globalnews';
+
                                         $scope.tweetsMason = {};
-                                        
-                                        $scope.tweetDate = function(t)
+
+                                        $scope.tweetDate = function (t)
                                         {
                                             var dt = new Date(t.created_at);
                                             return dt.toDateString();
@@ -147,8 +155,9 @@
 
                                         $scope.loadTweets = function (repack) {
                                             $scope.tweets = [];
+                                            $scope.loading = true;
 
-                                            $http.get('/twitter.php?q=worldnews').success(function (data) {
+                                            $http.get('/twitter.php?q=' + $scope.searchQuery).success(function (data) {
                                                 $scope.tweets = data;
                                                 $timeout(function () {
 
@@ -165,6 +174,8 @@
                                                         grid.masonry('layout');
                                                     });
                                                     $scope.tweetsMason = grid;
+
+                                                    $scope.loading = false;
 
 
                                                 }, 0);
