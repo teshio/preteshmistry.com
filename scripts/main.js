@@ -1,3 +1,5 @@
+/* global angular */
+
 var app = angular.module('mainApp', ['ngAnimate', 'ngSanitize']);
 
 
@@ -21,17 +23,16 @@ app.filter('tweetText', function () {
         text = text.replace(
                 /(:\/\/|>)?(@([_a-z0-9\-]+))/gi,
                 function ($0, $1, $2, $3) {
-                    return ($1 ? $0 : '<a href="' + base_url + $3
-                            + '" title="Follow ' + $3 + '" target="_blank">@' + $3
-                            + '</a>');
+                    return ($1 ? $0 : '<a href="' + base_url + $3 + 
+                            '" title="Follow ' + $3 + '" target="_blank">@' + $3 + '</a>');
                 });
         // convert #hashtags into tag search links
         text = text.replace(
                 /(:\/\/[^ <]*|>)?(\#([_a-z0-9\-]+))/gi,
                 function ($0, $1, $2, $3) {
-                    return ($1 ? $0 : '<a href="' + base_url + hashtag_part + $3
-                            + '" title="Search tag: ' + $3 + '" target="_blank">#' + $3
-                            + '</a>');
+                    return ($1 ? $0 : '<a href="' + base_url + hashtag_part + $3 + 
+                            '" title="Search tag: ' + $3 + '" target="_blank">#' + 
+                            $3 + '</a>');
                 });
         return text;
     };
