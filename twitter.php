@@ -16,7 +16,7 @@ $settings = array(
 
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
-$getfield = '?q='. urlencode($_GET['q'] ?: '') . '&lang=en-gb&result_type=mixed&count=50';
+$getfield = '?q='. urlencode($_GET['q'] ?: '') . '&lang=en&result_type=mixed&count=50';
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
