@@ -32,7 +32,7 @@
                 .tweet { width: 31.5%; }
             }
             @media screen and (min-width: 992px ) {
-                .tweet { width: 32.5%; }
+                .tweet { width: 31%; }
             }
 
             @media screen and (min-width: 1500px) {
@@ -141,7 +141,7 @@
 
                                         $scope.loading = false;
 
-                                        $scope.searchQuery = 'globalnews';
+                                        $scope.searchQuery = 'world news';
 
                                         $scope.tweetsMason = {};
 
@@ -157,7 +157,7 @@
                                             $scope.tweets = [];
                                             $scope.loading = true;
 
-                                            $http.get('/twitter.php?q=' + $scope.searchQuery).success(function (data) {
+                                            $http.get('/twitter.php', { params: { q : $scope.searchQuery}}).success(function (data) {
                                                 $scope.tweets = data;
                                                 $timeout(function () {
 
