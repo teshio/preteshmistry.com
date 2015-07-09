@@ -8,7 +8,7 @@
         <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
         <script src="components/jquery/jquery.min.js" type="text/javascript"></script>
         <script src="scripts/parallax.js" type="text/javascript"></script>
-        <script src="scripts/main.js" type="text/javascript"></script>
+        <script src="scripts/main2.js" type="text/javascript"></script>
         <style type="text/css">
             .tweet{
                 background-color: #555;
