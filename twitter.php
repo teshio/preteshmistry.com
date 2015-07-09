@@ -4,13 +4,6 @@ header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
 
 require_once('TwitterAPIExchange.php');
-//
-//$settings = array(
-//    'oauth_access_token' => "183704754-4haXnrHppI6FwETgyYoPG6Ja8yVLV6ZtpgzgQVM",
-//    'oauth_access_token_secret' => "9IXRlbLmFW27VeTbQInIVjPmDUz4rBQsxYe94SRW9Ac",
-//    'consumer_key' => "LJrslT7mzx7zZjc5dRlOX6zi1",
-//    'consumer_secret' => "LBHpcjK7LfyhNMokAPikoUHmjZiHDDg1HdrsWCJyGNoMDWWxZJ"
-//);
 
 if (file_exists('secrets.ini')) {
     $settings = parse_ini_file("secrets.ini");
