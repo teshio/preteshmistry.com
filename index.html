@@ -23,11 +23,11 @@
                 <div class="navbar-header">
                     <!--
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                            <span class="sr-only">Toggle navigation</span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     -->
                     <a class="navbar-brand" href="/"><i class="fa fa-newspaper-o"></i> What's happening right now!</a>
                 </div>
@@ -37,29 +37,30 @@
         </nav>
 
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="text" ng-model="searchQuery" ng-disabled="loading" class="form-control"/>                        
-                    </div>
+
+            <form class="form-inline" ng-submit="loadTweets()">
+                <div class="form-group">
+                    <label for="searchQuery" class="form-label">Search Terms</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input id="searchQuery" type="text" ng-model="searchQuery" ng-disabled="loading" class="form-control" placeholder="search terms" />                        
+                    </div>                  
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <select class="form-control" ng-model="tweetCount" ng-change="loadTweets()">
-                            <option>10</option>
-                            <option>20</option>
-                            <option>50</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="searchQuery" class="form-label">Tweet Count</label>
+                    <select class="form-control" ng-model="tweetCount" ng-change="loadTweets()">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                    </select>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block" ng-click="loadTweets()" ng-disabled="loading">
-                            <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}
-                        </button>
-                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" ng-click="loadTweets()" ng-disabled="loading">
+                        <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}
+                    </button>
                 </div>
-            </div>
+            </form>
+
         </div>
 
         <div class="container-fluid">
@@ -84,7 +85,7 @@
                             <p class="small">
                                 <a href tooltip data-placement="bottom" title="{{t.user.description}}" >{{t.user.screen_name}}</a>
                                 &nbsp;|&nbsp;
-                                <span class="text-primary">{{ tweetDate(t)}}</span>
+                                <span class="text-primary">{{ tweetDate(t)}}</span>                                
                             </p>    
                         </div>
                     </div>

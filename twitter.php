@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
 
 require_once('TwitterAPIExchange.php');
@@ -25,11 +25,13 @@ $getfield = '?q=' . urlencode($_GET['q'] ? : '') . '&lang=en&result_type=mixed&c
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
-$response = $twitter->setGetfield($getfield)
+$response = $twitter
+        ->setGetfield($getfield)
         ->buildOauth($url, $requestMethod)
         ->performRequest();
 
 header('Content-Type: application/json');
 echo($response);
+
 ?>
 
