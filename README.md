@@ -1,5 +1,5 @@
 ## preteshmistry.com
 
-This repository holds the source code running behind [www.preteshmistry.com](www.preteshmistry.com).
+This repository holds the source code running behind [preteshmistry.com](http://www.preteshmistry.com).
 
 
