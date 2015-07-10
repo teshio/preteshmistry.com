@@ -1,6 +1,6 @@
 /* global angular */
 
-var app = angular.module('mainApp', ['ngAnimate', 'ngSanitize']);
+var app = angular.module('mainApp', ['ngAnimate', 'ngSanitize','masonry']);
 
 
 app.filter('tweetText', function () {
@@ -23,15 +23,15 @@ app.filter('tweetText', function () {
         text = text.replace(
                 /(:\/\/|>)?(@([_a-z0-9\-]+))/gi,
                 function ($0, $1, $2, $3) {
-                    return ($1 ? $0 : '<a href="' + base_url + $3 + 
+                    return ($1 ? $0 : '<a href="' + base_url + $3 +
                             '" title="Follow ' + $3 + '" target="_blank">@' + $3 + '</a>');
                 });
         // convert #hashtags into tag search links
         text = text.replace(
                 /(:\/\/[^ <]*|>)?(\#([_a-z0-9\-]+))/gi,
                 function ($0, $1, $2, $3) {
-                    return ($1 ? $0 : '<a href="' + base_url + hashtag_part + $3 + 
-                            '" title="Search tag: ' + $3 + '" target="_blank">#' + 
+                    return ($1 ? $0 : '<a href="' + base_url + hashtag_part + $3 +
+                            '" title="Search tag: ' + $3 + '" target="_blank">#' +
                             $3 + '</a>');
                 });
         return text;
@@ -64,45 +64,27 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
     $scope.loading = false;
     $scope.searchQuery = 'world news';
     $scope.tweetsMason = {};
-    $scope.tweetCount = 50;
-    
+    $scope.tweetCount = 10;
+
     $scope.tweetDate = function (t)
     {
         var dt = new Date(t.created_at);
         return dt.toDateString();
     };
 
-    $scope.loadTweets = function (repack) {
+    $scope.loadTweets = function () {
         $scope.tweets = [];
         $scope.loading = true;
 
-        $http.get('/twitter.php', {params: {
+        $http.get('/twitter.php', {
+            params: {
                 q: $scope.searchQuery,
                 c: $scope.tweetCount
-            }}).success(function (data) {
+            }
+        }).success(function (data) {
             $scope.tweets = data;
-            $timeout(function () {
-
-                if (!repack) {
-                    $scope.tweetsMason.masonry('destroy');
-                }
-                var grid = $('.tweets').masonry({
-                    itemSelector: '.tweet',
-                    percentPosition: true,
-                });
-
-
-                grid.imagesLoaded().progress(function () {
-                    grid.masonry('layout');
-                });
-                $scope.tweetsMason = grid;
-
-                $scope.loading = false;
-
-
-            }, 0);
-
+            $scope.loading = false;
         });
-    };
-    $scope.loadTweets(true);
+    }
+    $scope.loadTweets();
 });
