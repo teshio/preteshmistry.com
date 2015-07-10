@@ -64,6 +64,8 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
     $scope.loading = false;
     $scope.searchQuery = 'world news';
     $scope.tweetsMason = {};
+    $scope.tweetCount = 50;
+    
     $scope.tweetDate = function (t)
     {
         var dt = new Date(t.created_at);
@@ -74,7 +76,10 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
         $scope.tweets = [];
         $scope.loading = true;
 
-        $http.get('/twitter.php', {params: {q: $scope.searchQuery}}).success(function (data) {
+        $http.get('/twitter.php', {params: {
+                q: $scope.searchQuery,
+                c: $scope.tweetCount
+            }}).success(function (data) {
             $scope.tweets = data;
             $timeout(function () {
 

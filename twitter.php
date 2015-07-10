@@ -18,7 +18,10 @@ if (file_exists('secrets.ini')) {
 
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
-$getfield = '?q=' . urlencode($_GET['q'] ? : '') . '&lang=en&result_type=mixed&count=50';
+
+$count = $_GET['c'] ?: 50;
+
+$getfield = '?q=' . urlencode($_GET['q'] ? : '') . '&lang=en&result_type=mixed&count='. $count;
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);

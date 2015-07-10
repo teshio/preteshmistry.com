@@ -29,7 +29,7 @@
                                             <span class="icon-bar"></span>
                                         </button>
                     -->
-                    <a class="navbar-brand" href="" ng-click="loadTweets()">What's happening right now!</a>
+                    <a class="navbar-brand" href="/"><i class="fa fa-newspaper-o"></i> What's happening right now!</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 </div>
@@ -38,15 +38,27 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-sm-8">
                     <div class="form-group">
                         <input type="text" ng-model="searchQuery" ng-disabled="loading" class="form-control"/>                        
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control" ng-model="tweetCount" ng-change="loadTweets()">
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+
+
                     <div class="form-group">
                         <button class="btn btn-primary btn-block" ng-click="loadTweets()" ng-disabled="loading">
-                            <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}</button>
+                            <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}
+                        </button>
                     </div>
 
                 </div>
