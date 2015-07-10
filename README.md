@@ -6,4 +6,5 @@ Showcase of following technologies and frameworks:
 * AngularJS
 * PHP
 * LESS/CSS3
+* Twitter OpenAuth integration
 
