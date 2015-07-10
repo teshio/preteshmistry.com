@@ -83,8 +83,33 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
             }
         }).success(function (data) {
             $scope.tweets = data;
+            console.log(data);
             $scope.loading = false;
         });
     }
+    
+    $scope.loadMore = function(){
+        $scope.loading = true;
+        debugger;
+        $http.get('/twitter.php', {
+            params: {
+                q: $scope.searchQuery,
+                c: $scope.tweetCount,
+                maxId: $scope.tweets.statuses[$scope.tweets.statuses.length - 1].id
+            }
+        }).success(function (data) {
+            var src = data.statuses;
+            var dest = $scope.tweets.statuses;
+            
+            for (var i = 0, max = src.length; i < max; i++) {
+                dest.push(src[i]);
+            }
+            
+            
+            //$scope.tweets.statuses.concat(data.statuses);
+            $scope.loading = false;
+        });        
+    }
+    
     $scope.loadTweets();
 });

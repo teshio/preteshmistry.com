@@ -21,7 +21,17 @@ $url = 'https://api.twitter.com/1.1/search/tweets.json';
 
 $count = $_GET['c'] ?: 50;
 
+$maxId = null;
+if (isset($_GET['maxId'])) {
+    $maxId = $_GET['maxId'];
+}
+
 $getfield = '?q=' . urlencode($_GET['q'] ? : '') . '&lang=en&result_type=mixed&count='. $count;
+
+if($maxId != null){
+    $getfield = $getfield . '&max_id=' . $maxId;
+}
+
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
