@@ -65,11 +65,11 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
     $scope.searchQuery = 'world news';
     $scope.tweetsMason = {};
     $scope.tweetCount = 10;
+    $scope.moreTweets = false;    
 
     $scope.tweetDate = function (t)
     {
-        var dt = new Date(t.created_at);
-        return dt.toDateString();
+        return new Date(t.created_at);
     };
 
     $scope.loadTweets = function () {
@@ -85,7 +85,13 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
             $scope.tweets = data;
             console.log(data);
             $scope.loading = false;
+            $scope.moreTweets = data.statuses.length == $scope.tweetCount;
         });
+    };
+    
+    $scope.deleteTweet = function(t){
+        var i = $scope.tweets.statuses.indexOf(t);
+        $scope.tweets.statuses.splice(i, 1);
     }
     
     $scope.loadMore = function(){
@@ -105,8 +111,7 @@ app.controller('mainCtrl', function ($scope, $http, $timeout) {
                 dest.push(src[i]);
             }
             
-            
-            //$scope.tweets.statuses.concat(data.statuses);
+            $scope.moreTweets = data.statuses.length == $scope.tweetCount;
             $scope.loading = false;
         });        
     }
