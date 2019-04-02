@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Pretesh Mistry | Home</title>
         <link rel="icon" type="image/png" href="/images/favicon.png" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/newstyle.css">
@@ -39,26 +39,24 @@
         <div class="container-fluid">
 
             <form class="form-inline" ng-submit="loadTweets()" >
-                <div class="form-group">
-                    <label for="searchQuery" class="form-label">Search Terms</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                        <input id="searchQuery" type="text" ng-model="searchQuery" ng-disabled="loading" class="form-control" placeholder="search terms" />                        
-                    </div>                  
-                </div>
-                <div class="form-group">
-                    <label for="searchQuery" class="form-label">Tweet Count</label>
-                    <select class="form-control" ng-disabled="loading" ng-model="tweetCount" ng-change="loadTweets()">
+                    <label for="searchQuery" class="sr-only">Search Terms</label>
+                    <div class="input-group mr-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <input id="searchQuery" type="text" ng-model="searchQuery" ng-disabled="loading" class="form-control" placeholder="search terms" />
+                    </div>
+                    <label for="searchQuery" class="sr-only">Tweet Count</label>
+                    <select class="form-control mr-2" ng-disabled="loading" ng-model="tweetCount" ng-change="loadTweets()">
                         <option>10</option>
                         <option>20</option>
                         <option>50</option>
                     </select>
-                </div>
-                <div class="form-group">
                     <button type="submit" class="btn btn-primary" ng-click="loadTweets()" ng-disabled="loading">
                         <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> {{loading ? "Please Wait" : 'Refresh' }}
                     </button>
-                </div>
             </form>
 
         </div>
@@ -66,46 +64,27 @@
         <div class="container-fluid">
             <div class="row tweets" masonry='{ "itemSelector": ".tweet"}'>
                 <div class="col-md-3 col-sm-6 tweet" masonry-tile ng-repeat="t in tweets.statuses">
-                    <div class="tweet-inner">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span class="close" ng-click="deleteTweet(t)">
-                                    &times;                            
-                                </span>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <p>
-                                            <img class="media-object" ng-src="{{t.user.profile_image_url}}" />                                                                
+                  <div class="card">
+                    <img src="{{t.user.profile_image_url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
 
-                                        </p>
-                                    </div>
-                                    <article class="media-body">
-                                        <p class="" ng-bind-html="t.text | linky"></p>
-                                    </article>
-                                </div>                        
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 text-right">
-                                <p class="small">
-                                    <a href tooltip data-placement="bottom" title="{{t.user.description}}" >{{t.user.screen_name}}</a>
-                                    &nbsp;|&nbsp;
-                                    
-                                    <span class="">{{ tweetDate(t) | date:'short'}}</span>                                
-                                </p>    
-                            </div>
-                        </div>
-                        <div class="row" ng-hide="t.entities.media.length == 0">
-                            <div class="col-xs-12">
-                                <img ng-repeat="mediaImage in t.entities.media" class="img-responsive" ng-src="{{mediaImage.media_url}}" />
-                            </div>
-                        </div>
+                      <h5 class="card-title">{{t.user.screen_name}}
+                        <button type="button" class="btn btn-danger" ng-click="deleteTweet(t)"><i class="fa fa-recycle"></i></button>
+                      </h5>
+                      <p class="card-text" ng-bind-html="t.text | linky"></p>
+                      <div class="row" ng-hide="t.entities.media.length == 0">
+                          <div class="col-xs-12">
+                              <img ng-repeat="mediaImage in t.entities.media" class="img-responsive" ng-src="{{mediaImage.media_url}}" />
+                          </div>
+                      </div>
                     </div>
+                    <div class="card-footer text-muted">
+                      <span class="small">{{ tweetDate(t) | date:'short'}}</span>
+                    </div>
+
+                  </div>
+
                 </div>
             </div>
 
@@ -116,35 +95,35 @@
                 <div class="col-xs-12">
 
                     <button ng-show="moreTweets" class="btn btn-primary btn-lg" ng-disabled="loading" ng-click="loadMore()">
-                        <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i> 
+                        <i ng-show="loading"  class="fa fa-lg fa-cog fa-spin"></i>
                         {{loading ? "Please Wait" : 'Load More' }}
-                    </button>                
+                    </button>
                 </div>
             </div>
             <hr>
 
-            <div class="row text-center">
-                <footer class="small">
+                <footer class="text-center small">
                     &copy; 2015 <a href="http://www.preteshmistry.com">www.preteshmistry.com</a>
                 </footer>
-            </div>
 
 
         </div>
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/i18n/angular-locale_en-gb.js"></script>        
-        
-        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-animate.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>        
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/i18n/angular-locale_en-gb.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-animate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
         <script src="scripts/angular-masonry.js" type="text/javascript"></script>
-        <script src="scripts/main.js" type="text/javascript"></script>        
+        <script src="scripts/main.js" type="text/javascript"></script>
         <script>
                                     (function (i, s, o, g, r, a, m) {
                                         i['GoogleAnalyticsObject'] = r;
@@ -156,10 +135,10 @@
                                         a.async = 1;
                                         a.src = g;
                                         m.parentNode.insertBefore(a, m)
-                                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                                    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
                                     ga('create', 'UA-11994419-1', 'auto');
                                     ga('send', 'pageview');
-        </script>        
+        </script>
     </body>
 </html>
