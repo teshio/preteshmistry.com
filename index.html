@@ -66,25 +66,34 @@
                 <div class="col-md-3 col-sm-6 tweet" masonry-tile ng-repeat="t in tweets.statuses">
 
                   <div class="card">
-                    <img src="{{t.user.profile_image_url}}" class="card-img-top" alt="...">
-                    <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-md-3 mx-auto">
+                        <img src="{{t.user.profile_image_url}}" class="card-img" alt="...">
+                      </div>
+                      <div class="col-md-9">
+                        <div class="card-body">
 
-                      <h5 class="card-title">{{t.user.screen_name}}
-                        <button type="button" class="btn btn-danger" ng-click="deleteTweet(t)"><i class="fa fa-recycle"></i></button>
-                      </h5>
-                      <p class="card-text" ng-bind-html="t.text | linky"></p>
-                      <div class="row" ng-hide="t.entities.media.length == 0">
-                          <div class="col-xs-12">
-                              <img ng-repeat="mediaImage in t.entities.media" class="img-responsive" ng-src="{{mediaImage.media_url}}" />
-                          </div>
+                          <h5 class="card-title text-success">{{t.user.screen_name}}</h5>
+                        </div>
                       </div>
                     </div>
-                    <div class="card-footer text-muted">
-                      <span class="small">{{ tweetDate(t) | date:'short'}}</span>
+
+                      <div class="card-body">
+                    <p class="card-text" ng-bind-html="t.text | linky"></p>
+                    <div class="row" ng-hide="t.entities.media.length == 0">
+                        <div class="col-xs-12">
+                            <img ng-repeat="mediaImage in t.entities.media" class="img-thumbnail" ng-src="{{mediaImage.media_url}}" />
+                        </div>
+                    </div>
+                  </div>
+
+                    <div class="card-footer text-muted small">
+                      <span class="">{{ tweetDate(t) | date:'short'}}</span>
+                      <button type="button" class="btn btn-dark float-right" ng-click="deleteTweet(t)"><i class="fa fa-trash"></i></button>
+
                     </div>
 
                   </div>
-
                 </div>
             </div>
 
@@ -103,7 +112,7 @@
             <hr>
 
                 <footer class="text-center small">
-                    &copy; 2015 <a href="http://www.preteshmistry.com">www.preteshmistry.com</a>
+                    &copy; 2019 <a href="http://www.preteshmistry.com">www.preteshmistry.com</a>
                 </footer>
 
 
