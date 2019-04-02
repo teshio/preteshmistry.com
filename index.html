@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     -->
-                    <a class="navbar-brand" href="/"><i class="fa fa-newspaper-o"></i> What's happening right now!</a>
+                    <a class="navbar-brand" href="#"><i class="fa fa-newspaper-o"></i> What's happening right now!</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 </div>
@@ -66,20 +66,23 @@
                 <div class="col-md-3 col-sm-6 tweet" masonry-tile ng-repeat="t in tweets.statuses">
 
                   <div class="card">
-                    <div class="row align-items-center">
-                      <div class="col-md-3 mx-auto">
-                        <img src="{{t.user.profile_image_url}}" class="card-img" alt="...">
-                      </div>
-                      <div class="col-md-9">
-                        <div class="card-body">
+                    <div class="row align-items-center no-gutters">
 
-                          <h5 class="card-title text-success">{{t.user.screen_name}}</h5>
+                      <div class="col-md-10">
+                        <div class="card-body">
+                          <h5 class="card-title text-success text-right">
+                            {{t.user.screen_name}}
+                          </h5>
+                          <p class="card-text text-muted small text-right" ng-bind-html="t.user.description | linky"></p>
                         </div>
+                      </div>
+                      <div class="col-md-2  mx-auto">
+                        <img src="{{t.user.profile_image_url}}" class="card-img" alt="...">
                       </div>
                     </div>
 
                       <div class="card-body">
-                    <p class="card-text" ng-bind-html="t.text | linky"></p>
+                    <p class="card-text text-justify" ng-bind-html="t.text | linky"></p>
                     <div class="row" ng-hide="t.entities.media.length == 0">
                         <div class="col-xs-12">
                             <img ng-repeat="mediaImage in t.entities.media" class="img-thumbnail" ng-src="{{mediaImage.media_url}}" />
@@ -88,8 +91,18 @@
                   </div>
 
                     <div class="card-footer text-muted small">
-                      <span class="">{{ tweetDate(t) | date:'short'}}</span>
-                      <button type="button" class="btn btn-dark float-right" ng-click="deleteTweet(t)"><i class="fa fa-trash"></i></button>
+                      <div class="row">
+                        <div class="col-10">
+                          <span class="">
+                            {{ tweetDate(t) | date:'short'}}<br>
+                          {{ t.user.location }}</span>
+
+                        </div>
+                        <div class="col-2">
+                          <button type="button" class="btn btn-dark float-right" ng-click="deleteTweet(t)"><i class="fa fa-trash"></i></button>
+                        </div>
+                      </div>
+
 
                     </div>
 
