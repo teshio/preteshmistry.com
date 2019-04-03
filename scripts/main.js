@@ -17,7 +17,7 @@
                     return ($1 ? $0 : '<a href="' + $2 + '" target="_blank">' + $2 + '</a>');
                 }
             );
-            // convert protocol-less URLs into links		
+            // convert protocol-less URLs into links
             text = text.replace(
                 /(:\/\/|>)?\b(([\-a-z0-9]+\.)+[a-z]{2,5}(\/[\-a-z0-9!#()\/?&.]*[^ !#?().,])?)/gi,
                 function ($0, $1, $2) {
@@ -89,7 +89,7 @@
                 }
             }).success(function (data) {
                 $scope.tweets = data;
-                console.log(data);
+                //console.log(data);
                 $scope.loading = false;
                 $scope.moreTweets = data.statuses.length === $scope.tweetCount;
             });
