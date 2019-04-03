@@ -78,6 +78,10 @@
             return new Date(t.created_at);
         };
 
+        $scope.getFullImage = function(img){
+          return img.replace('_normal', '');
+        };
+
         $scope.loadTweets = function () {
             $scope.tweets = [];
             $scope.loading = true;
