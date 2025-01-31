@@ -6,6 +6,6 @@
         }
     ],
     "require": {
-		"components/jquery": "1.9.*"
+		"components/jquery": "3.5.*"
 	}
 }
